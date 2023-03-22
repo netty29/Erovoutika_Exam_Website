@@ -99,6 +99,7 @@
                 unset($clAsID_value);
             }
             
+            // FORMER DELETE QUESTION
             if($question_modifyType == "2") { // Delete/Nullify Current Existing Question
                 $sql_query .= "DELETE FROM `tbQuestion`
                     WHERE `clQsID` = '$clQsID_value' AND `clExID` = '$clExID_value';

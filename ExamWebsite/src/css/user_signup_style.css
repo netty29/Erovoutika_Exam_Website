@@ -19,15 +19,16 @@ body{
   }
   .logo2{
     position: absolute;
-    margin-left: -320px;
-    margin-top: 130px;
-    height: 300px;
-    width: 500px;
+    margin-left: -10px;
+    margin-top: -30px;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
   }
   .wrapper{
-    margin-top: 2px;
-    margin-left: 400px;
-    width: 600px;
+    margin-top: 200px;
+    margin-left: -5px;
+    width: 400px;
     background: #fff;
     border-radius: 5px;
     box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
@@ -111,45 +112,28 @@ form .text h3 a:hover{
 .return-link a:hover{
   text-decoration: underline;
 }
-@media (max-width: 1024px) {
+@media (max-width: 50px) {
   .container{
     max-width: 100%;
     }
   .logo2{
-    display: none;
+    align-items: center;
+    position: relative;
+    margin-top: 10px;
+    margin-left: 50px;
+    height: auto;
+    width: auto;
 
   } 
   .wrapper{
-    width: 90%;
-    height: 91%;
+    width: auto;
+    height: auto;
     position: absolute;
     background: #fff;
-    justify-content: center;
+    align-items: center;
     margin-left: -174px;
     margin-top: -282px;
     border-radius: 5px;
     box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
-  }
-  .wrapper form{
-    padding: 15px 15px 15px 15px;
-    max-width: 100%;
-    max-height: fit-content;
-  }
-.wrapper form .input-box{
-  height: 30px;
-  margin: 15px 0;
-}
-  form .input-box input{
-    max-height: fit-content;
-    max-width: 100%;
-    outline: none;
-    padding: 0 5px;
-    font-size: 15px;
-    font-weight: 400;
-    color: #333;
-    border: 1.5px solid #C7BEBE;
-    border-bottom-width: 4.5px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
   }
 }

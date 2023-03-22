@@ -68,7 +68,8 @@
 
         $sql_query .= "UPDATE `tbExam`
             SET `clExPublish` = '$clExPublish_value', 
-                `clExPublishedBy` = '$clExPublishedBy_value' 
+                `clExPublishedBy` = '$clExPublishedBy_value',
+                `clExPublishedDate` = date_format(now(), '%Y-%m-%d %H:%i:%s')
             WHERE `clExID` = '$clExID_value';
             ";
 

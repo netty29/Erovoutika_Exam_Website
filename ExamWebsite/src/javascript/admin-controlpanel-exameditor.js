@@ -300,7 +300,9 @@ function baseQuestion(in_displayContainerID, in_questionCount) {
     // Create & Set (FILLER CELL)
     var insert_modify_cell_sub2 = document.createElement("div");
     insert_modify_cell_sub2.setAttribute("class", "col-3");
+    //-- FORMER DELETE BUTTON 
     insert_modify_cell_sub2.appendChild(insert_modify_deletebutton);
+
     // Create & Set (FILLER CELL)
     var insert_modify_cell_sub1 = document.createElement("div");
     insert_modify_cell_sub1.setAttribute("class", "col-9");
@@ -1052,6 +1054,43 @@ function transferExamData(in_resetModifyTypeValue,in_updateType) {
     });
 }
 
+// temporary deelete question function
+function passAjaxData(in_resetModifyTypeValue,in_updateType) {
+    // Pass to '../crud/admin_exameditor_update.php' for Database Insertion
+    $(document).ready(function(){
+        $.ajax({
+            url: "../crud/admin_exameditor_update.php", 
+            type: "POST", 
+            data: {
+                curr_tbExam_data_ajax: curr_tbExam_data, 
+                curr_QA_data_ajax: curr_QA_data, 
+                updateType_ajax: in_updateType
+            }, 
+            // contentType: false, 
+            // processData: false, 
+            // async: false, 
+            cache: false, 
+            success: function(data) {
+                // alert(data);
+                
+                if(in_resetModifyTypeValue == true) {
+                    alert('SUCCESS: Question.');
+                    setSaveArrayModifyType(0);
+                }
+                else if(in_resetModifyTypeValue == false) {
+                    alert('SUCCESS: Question has been deleted.');
+                    Object.keys(curr_tbExam_data).forEach(function(in_index) { delete curr_tbExam_data[in_index] })
+                    curr_QA_data = [];
+                }
+            }, 
+            error: function(data) {
+                // alert(data);
+                alert('ERROR: An error occured while saving the Exam.');
+            }
+        });
+    });
+}
+
 function modifyExam(in_buttonName, in_elementID) {
     // =====Add=====
     if((in_buttonName.localeCompare("inputbutton_qa_add")) == 0) { // Add Question and Answers
@@ -1116,6 +1155,7 @@ function modifyExam(in_buttonName, in_elementID) {
         var qa_saveArrayIndex = Number(qa_elementRowID.substring(qa_elementRowID.lastIndexOf("-")+1)) - 1;
         var qa_modifyType = curr_QA_data[qa_saveArrayIndex].modifyType;
         
+        
         for(answer_count = 0; answer_count < (curr_QA_data[qa_saveArrayIndex].tbAnswer_data).length; answer_count++) {
             deleteAnswer(qa_saveArrayIndex,answer_count);
         }
@@ -1153,8 +1193,11 @@ function modifyExam(in_buttonName, in_elementID) {
 
         totalQuestionCount--;
         toggleEmptyText(totalQuestionCount, "i-div--qa-empty", "i-div--qa-display");
-        
+        //setSaveArrayModifyType(2);
+        // ETO NA transferExamData(false, 0);
         // Delete in_element
+        setSaveArrayModifyType(2);
+        passAjaxData(True, 0);
         $(qa_elementRow).remove();
     }
     else if((in_buttonName.localeCompare("inputbutton_answerhybridmultiple_delete")) == 0) { // Delete Hybrid Multiple Choice Answer

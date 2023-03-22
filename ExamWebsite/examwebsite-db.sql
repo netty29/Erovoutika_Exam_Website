@@ -46,12 +46,9 @@ CREATE TABLE `tbExam` (
 	`clExLastEditedBy` int(9) UNSIGNED NOT NULL, 
 	`clExPublishedBy` int(9) UNSIGNED DEFAULT NULL, 
 	`clExLastEditDate` datetime not null default now(),
+	`clExPublishedDate` datetime,
     PRIMARY KEY (`clExID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-LOCK TABLES `tbExam` WRITE;
-INSERT INTO `tbExam` (`clExID`,`clExName`,`clExDescription`,`clExInstructions`,`clExPublish`,`clExLastEditedBy`,`clExPublishedBy`,`clExLastEditDate`) 
-	VALUES (1,'Data Structures','A basic exam about Data Structures and its concepts','Answer the questions.',0,1,null,'2023-03-14 14:21:11');
-UNLOCK TABLES;
 -- ==================================================================tbQuestion
 DROP TABLE IF EXISTS `tbQuestion`;
 CREATE TABLE `tbQuestion` (
@@ -63,11 +60,6 @@ CREATE TABLE `tbQuestion` (
     PRIMARY KEY (`clQsID`,`clExID`), 
     CONSTRAINT `fkQs_clExID` FOREIGN KEY (`clExID`) REFERENCES `tbExam` (`clExID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-LOCK TABLES `tbQuestion` WRITE;
-INSERT INTO `tbQuestion` (`clQsID`,`clExID`,`clQsBody`,`clQsType`,`clQsCorrectAnswer`) 
-	VALUES (1,1,'The terms "bitmap," "b-tree," and "hash" refer to which type of database structure?',1,'3,4'), 
-		(2,1,'TEST ______?',0,'6');
-UNLOCK TABLES;
 -- ==================================================================tbAnswer
 DROP TABLE IF EXISTS `tbAnswer`;
 CREATE TABLE `tbAnswer` (
@@ -77,15 +69,6 @@ CREATE TABLE `tbAnswer` (
     PRIMARY KEY (`clAsID`,`clQsID`), 
     CONSTRAINT `fkAs_clQsID` FOREIGN KEY (`clQsID`) REFERENCES `tbQuestion` (`clQsID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-LOCK TABLES `tbAnswer` WRITE;
-INSERT INTO `tbAnswer` (`clAsID`,`clQsID`,`clAsBody`) 
-	VALUES (1,1,'View'), 
-		(2,1,'Function'), 
-		(3,1,'Index'), 
-		(4,1,'Stored procedure'), 
-		(5,1,'Trigger'), 
-		(6,2,'TESTANSWERHERE');
-UNLOCK TABLES;
 -- ==================================================================tbuserexam
 DROP TABLE IF EXISTS `tbuserexam`;
 CREATE TABLE `tbuserexam` (
@@ -96,10 +79,6 @@ CREATE TABLE `tbuserexam` (
     CONSTRAINT `fkUe_clUrID` FOREIGN KEY (`clUrID`) REFERENCES `tbusers` (`clUrID`), 
     CONSTRAINT `fkUe_clExID` FOREIGN KEY (`clExID`) REFERENCES `tbExam` (`clExID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-LOCK TABLES `tbuserexam` WRITE;
-INSERT INTO `tbuserexam` (`clUeID`,`clUrID`,`clExID`) 
-	VALUES (1,3,1);
-UNLOCK TABLES;
 -- ==================================================================tbuseranswer
 DROP TABLE IF EXISTS `tbuseranswer`;
 CREATE TABLE `tbuseranswer` (
@@ -109,9 +88,4 @@ CREATE TABLE `tbuseranswer` (
     PRIMARY KEY (`clUeID`,`clUaQuestionID`), 
     CONSTRAINT `fkUa_clUeID` FOREIGN KEY (`clUeID`) REFERENCES `tbuserexam` (`clUeID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-LOCK TABLES `tbuseranswer` WRITE;
-INSERT INTO `tbuseranswer` (`clUeID`,`clUaQuestionID`,`clUaAnswer`) 
-	VALUES (1,1,'3,4'), 
-		(1,2,'ThisIsMyAnswer');
-UNLOCK TABLES;
 -- ==================================================================
