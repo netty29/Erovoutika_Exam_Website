@@ -6,12 +6,9 @@ include '../includes/connectdb.php';
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../css/admin_signup_style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/admin_signup_style.css">
     </head>
     <body>
   <section class="h-100 bg-primary">
@@ -21,9 +18,7 @@ include '../includes/connectdb.php';
           <div class="card card-registration my-4">
             <div class="row g-0">
               <div class="col-xl-6 d-none d-xl-block">
-                <img src="images/Admin_Signup.png"
-                  alt="Sample photo" class="img-fluid"
-                  style="margin-top: 100px; margin-left: 20px;" />
+              <img src="images/Logo2light.png" class="adsulogo" alt="logo">
               </div>
               <div class="col-xl-6">
                 <div class="card-body p-md-5 text-black">
