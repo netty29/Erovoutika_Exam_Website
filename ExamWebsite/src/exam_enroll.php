@@ -136,12 +136,22 @@ $searchInput;
                 }
             }
             while($row3 = $res->fetch_array(MYSQLI_NUM)){
+                $userFkRes = $connectdb->query("SELECT * FROM tbusers WHERE clUrID = ".$row3[6]."");
+                $userData;
+                while($userFkRow = $userFkRes->fetch_array(MYSQLI_NUM)){
+                    $userData = $userFkRow;
+                }
                 echo '<div class="col-sm-4 py-4">';
                 echo '<div class="card h-200">';
                 echo '<div class="card-body border border-3 border-primary rounded ">';
                 echo '<h2 class="d-flex border-5 border-bottom border-primary mb-4">';
                 echo  $row3[1];
                 echo '</h2>';
+                echo '<table>';
+                echo '<tr><td colspan = 2>'.$row3[2].'</td></tr>';
+                echo '<tr><td colspan = 2><b>Instructions: </b>'.$row3[3].'</td></tr><tr><td><b>Publisher: </b>'.$userData[1].' '.$userData[2].'</td>';
+                echo '<td><b>Price: </b> '."00".'</td></tr><tr><td colspan=2><b>Publish Date: </b>'.$row3[7].'</td></tr>';
+                echo '</table>';
                 echo '<div><button type="button" class="btn btn-primary" id="'.$row3[0].'" onclick="enroll(this)">Take Quiz</button></div>';
                 echo '</div>';
                 echo '</div>';
