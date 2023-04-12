@@ -1,11 +1,11 @@
 <?php 
-include_once $_SERVER['DOCUMENT_ROOT'].'/src/includes/connectdb.php';
-// if($_SESSION['client_sid'] == null){
-//     echo "<script>";
-//     echo "window.location = '../src/login.php';";
-//     echo "</script>";
-// }
-$searchInput = "";
+include_once '../src/includes/connectdb.php';
+if($_SESSION['client_sid'] == null){
+    echo "<script>";
+    echo "window.location = '../src/login.php';";
+    echo "</script>";
+}
+$searchInput;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,15 +74,21 @@ $searchInput = "";
             <span class="navbar-toggler-icon"></span>
             </button>
 
-            <form class="d-flex">
-                <div class="search-box">
-                <input type="text" autocomplete="off" placeholder="Search Exam" id = "searchExam" onchange="examSearch()" />
-                    <div class="result">
-                    </div>
-                </div>
-            </form>
+            
         </div>
     </nav>
+    <form class="d-flex" method="POST">
+        <div class="search-box">
+            <input type="text" autocomplete="off" placeholder="Search Exam" id = "searchExam" name = "search"/>
+                <?php
+                    error_reporting(0);
+                    $searchInput=$_POST['search'];
+                    error_reporting(E_WARNING);
+                ?>
+                <div class="result">
+            </div>
+        </div>
+    </form>
 
     <!-- Multi-Step Table Form -->
         <div id="multi_step_form">
@@ -99,188 +105,74 @@ $searchInput = "";
                 <div class="progress_holder">
                 </div>
                 </div>
-                <fieldset class="step" id="step1">
-          
+
+
         <!-- Exam Card -->
-            <div class="exam_container">
-                <div class="row">
-                    <?php
-                        if($searchInput == ""){
-                            $res = $connectdb->query("SELECT * FROM tbExam WHERE clExID BETWEEN 1 AND 6");
-                        }
-                        else{
-                            $res = $connectdb->query("SELECT * FROM tbExam WHERE clExName LIKE '%".$searchInput."%'");
-                        }
-                        while($row = $res->fetch_array(MYSQLI_NUM)){
-                            echo '<div class="col-sm-4 py-4">';
-                            echo '<div class="card h-200">';
-                            echo '<div class="card-body border border-3 border-primary rounded ">';
-                            echo '<h2 class="d-flex border-5 border-bottom border-primary mb-4">';
-                            echo  $row[1];
-                            echo '</h2>';
-                            echo '<div><button type="button" class="btn btn-primary" id="'.$row[0].'" onclick="enroll(this)">Take Quiz</button></div>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '</div>';
-                        }
-                    ?>
-                </div>
-            <?php 
-            $res = $connectdb->query("SELECT COUNT(`clExID`) FROM `tbexam` WHERE clExName LIKE '%".$searchInput."%'");
-            $examCount = 0;
-            while($row = $res->fetch_array(MYSQLI_NUM)){
-                $examCount = $row[0];
+
+        <?php
+        $stepNum = 1;
+        $betStart = 1;
+        $betEnd = 6;
+        $examCount = 0;
+        $total = $connectdb->query("SELECT COUNT(*) FROM tbExam");
+        $row = $total->fetch_array(MYSQLI_NUM);
+        $pages = ceil($row[0]/5);
+        for($i=0;$i<$pages;$i++){
+            echo '<fieldset class="step" id="step'.$stepNum.'">';
+            if($stepNum > 1){
+                echo '<div class="prevStep" style="border-color: #0035c6;">Prev</div>';
             }
-            if($examCount > 6){
+            echo '<div class="exam_container">';
+            echo '<div class="row">';
+            if(empty($searchInput) || $searchInput == null || $searchInput == ""){
+                $res = $connectdb->query("SELECT * FROM tbExam WHERE clExID BETWEEN ".$betStart." AND ".$betEnd."");
+            }
+            else{
+                if($stepNum == 1){
+                    $res = $connectdb->query("SELECT * FROM tbExam WHERE clExName LIKE '%".$searchInput."%' LIMIT 6");
+                }
+                else{
+                    $res = $connectdb->query("SELECT * FROM tbExam WHERE clExName LIKE '%".$searchInput."%' LIMIT 6,6");
+                }
+            }
+            while($row3 = $res->fetch_array(MYSQLI_NUM)){
+                $userFkRes = $connectdb->query("SELECT * FROM tbusers WHERE clUrID = ".$row3[6]."");
+                $userData;
+                while($userFkRow = $userFkRes->fetch_array(MYSQLI_NUM)){
+                    $userData = $userFkRow;
+                }
+                echo '<div class="col-sm-4 py-4">';
+                echo '<div class="card h-200">';
+                echo '<div class="card-body border border-3 border-primary rounded ">';
+                echo '<h2 class="d-flex border-5 border-bottom border-primary mb-4">';
+                echo  $row3[1];
+                echo '</h2>';
+                echo '<table>';
+                echo '<tr><td colspan = 2>'.$row3[2].'</td></tr>';
+                echo '<tr><td colspan = 2><b>Instructions: </b>'.$row3[3].'</td></tr><tr><td><b>Publisher: </b>'.$userData[1].' '.$userData[2].'</td>';
+                echo '<td><b>Price: </b> '."00".'</td></tr><tr><td colspan=2><b>Publish Date: </b>'.$row3[7].'</td></tr>';
+                echo '</table>';
+                echo '<div><button type="button" class="btn btn-primary" id="'.$row3[0].'" onclick="enroll(this)">Take Quiz</button></div>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+                
+            }
+            echo '</div>';
+            $res2 = $connectdb->query("SELECT COUNT(`clExID`) FROM `tbexam` WHERE clExName LIKE '%".$searchInput."%'");
+            while($row2 = $res2->fetch_array(MYSQLI_NUM)){
+                $examCount = $row2[0];
+            }
+            if($examCount > $betEnd){
                 echo '<div class="nextStep" style="border-color: #0035c6;">Next</button></div>';
             }
-            ?>
-            </fieldset>
-            <fieldset class="step" id="step2">
-            <div class="prevStep" style="border-color: #0035c6;">Prev</div>
-            <div class="exam_container">
-                <div class="row">
-                        <?php
-                        if($searchInput == ""){
-                            $res = $connectdb->query("SELECT * FROM tbExam WHERE clExID BETWEEN 7 AND 12");
-                        }
-                        else{
-                            $res = $connectdb->query("SELECT * FROM tbExam WHERE clExName LIKE '%".$searchInput."%'");
-                        }
-                        while($row = $res->fetch_array(MYSQLI_NUM)){
-                            echo '<div class="col-sm-4 py-4">';
-                            echo '<div class="card h-200">';
-                            echo '<div class="card-body border border-3 border-primary rounded ">';
-                            echo '<h2 class="d-flex border-5 border-bottom border-primary mb-4">';
-                            echo  $row[1];
-                            echo '</h2>';
-                            echo '<div><button type="button" class="btn btn-primary" id="'.$row[0].'" onclick="enroll(this)">Take Quiz</button></div>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '</div>';
-                        }
-                    ?>
-                </div>
-            <?php 
-            $res = $connectdb->query("SELECT COUNT(`clExID`) FROM `tbexam` WHERE clExName LIKE '%".$searchInput."%'");
-            $examCount = 0;
-            while($row = $res->fetch_array(MYSQLI_NUM)){
-                $examCount = $row[0];
-            }
-            if($examCount > 12){
-                echo '<div class="nextStep" style="border-color: #0035c6;">Next</button></div>';
-            }
-            ?>
-            </fieldset>
-            <fieldset class="step" id="step3">
-            <div class="prevStep" style="border-color: #0035c6;">Prev</div>
-            <div class="exam_container">
-                <div class="row">
-                        <?php
-                        if($searchInput == ""){
-                            $res = $connectdb->query("SELECT * FROM tbExam WHERE clExID BETWEEN 13 AND 18");
-                        }
-                        else{
-                            $res = $connectdb->query("SELECT * FROM tbExam WHERE clExName LIKE '%".$searchInput."%'");
-                        }
-                        while($row = $res->fetch_array(MYSQLI_NUM)){
-                            echo '<div class="col-sm-4 py-4">';
-                            echo '<div class="card h-200">';
-                            echo '<div class="card-body border border-3 border-primary rounded ">';
-                            echo '<h2 class="d-flex border-5 border-bottom border-primary mb-4">';
-                            echo  $row[1];
-                            echo '</h2>';
-                            echo '<div><button type="button" class="btn btn-primary" id="'.$row[0].'" onclick="enroll(this)">Take Quiz</button></div>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '</div>';
-                        }
-                    ?>
-                </div>
-            <?php 
-            $res = $connectdb->query("SELECT COUNT(`clExID`) FROM `tbexam` WHERE clExName LIKE '%".$searchInput."%'");
-            $examCount = 0;
-            while($row = $res->fetch_array(MYSQLI_NUM)){
-                $examCount = $row[0];
-            }
-            if($examCount > 18){
-                echo '<div class="nextStep" style="border-color: #0035c6;">Next</button></div>';
-            }
-            ?>
-            </fieldset>
-            <fieldset class="step" id="step4">
-            <div class="prevStep" style="border-color: #0035c6;">Prev</div>
-            <div class="exam_container">
-                <div class="row">
-                        <?php
-                        if($searchInput == ""){
-                            $res = $connectdb->query("SELECT * FROM tbExam WHERE clExID BETWEEN 19 AND 24");
-                        }
-                        else{
-                            $res = $connectdb->query("SELECT * FROM tbExam WHERE clExName LIKE '%".$searchInput."%'");
-                        }
-                        while($row = $res->fetch_array(MYSQLI_NUM)){
-                            echo '<div class="col-sm-4 py-4">';
-                            echo '<div class="card h-200">';
-                            echo '<div class="card-body border border-3 border-primary rounded ">';
-                            echo '<h2 class="d-flex border-5 border-bottom border-primary mb-4">';
-                            echo  $row[1];
-                            echo '</h2>';
-                            echo '<div><button type="button" class="btn btn-primary" id="'.$row[0].'" onclick="enroll(this)">Take Quiz</button></div>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '</div>';
-                        }
-                    ?>
-                </div>
-            <?php 
-            $res = $connectdb->query("SELECT COUNT(`clExID`) FROM `tbexam` WHERE clExName LIKE '%".$searchInput."%'");
-            $examCount = 0;
-            while($row = $res->fetch_array(MYSQLI_NUM)){
-                $examCount = $row[0];
-            }
-            if($examCount > 24){
-                echo '<div class="nextStep" style="border-color: #0035c6;">Next</button></div>';
-            }
-            ?>
-            </fieldset>
-            <fieldset class="step" id="step5">
-            <div class="prevStep" style="border-color: #0035c6;">Prev</div>
-            <div class="exam_container">
-                <div class="row">
-                        <?php
-                        if($searchInput == ""){
-                            $res = $connectdb->query("SELECT * FROM tbExam WHERE clExID BETWEEN 25 AND 30");
-                        }
-                        else{
-                            $res = $connectdb->query("SELECT * FROM tbExam WHERE clExName LIKE '%".$searchInput."%'");
-                        }
-                        while($row = $res->fetch_array(MYSQLI_NUM)){
-                            echo '<div class="col-sm-4 py-4">';
-                            echo '<div class="card h-200">';
-                            echo '<div class="card-body border border-3 border-primary rounded ">';
-                            echo '<h2 class="d-flex border-5 border-bottom border-primary mb-4">';
-                            echo  $row[1];
-                            echo '</h2>';
-                            echo '<div><button type="button" class="btn btn-primary" id="'.$row[0].'" onclick="enroll(this)">Take Quiz</button></div>';
-                            echo '</div>';
-                            echo '</div>';
-                            echo '</div>';
-                        }
-                    ?>
-                </div>
-            <?php 
-            $res = $connectdb->query("SELECT COUNT(`clExID`) FROM `tbexam` WHERE clExName LIKE '%".$searchInput."%'");
-            $examCount = 0;
-            while($row = $res->fetch_array(MYSQLI_NUM)){
-                $examCount = $row[0];
-            }
-            if($examCount > 30){
-                echo '<div class="nextStep" style="border-color: #0035c6;">Next</button></div>';
-            }
-            ?>
-            </fieldset>
-        </div>
+            echo '</fieldset>';
+            $stepNum += 1;
+            $betStart += 6;
+            $betEnd += 6;
+        }
+        ?>
+        
         </div>
 
         <!-- Search Bar -->
@@ -290,6 +182,7 @@ $searchInput = "";
                 $('.search-box input[type="text"]').on("keyup input", function(){
                     /* Get input value on change */
                     var inputVal = $(this).val();
+
                     var resultDropdown = $(this).siblings(".result");
                     if(inputVal.length){
                         $.get("backend-search.php", {term: inputVal}).done(function(data){
@@ -446,6 +339,8 @@ $searchInput = "";
     var paymentMessage = document.getElementById("paymentMessage");
     var closePayBtn = document.getElementById("closePayBtn");
     var payBtn = document.getElementById("payBtn");
+    var searchVal = document.getElementById("searchExam");
+    var searchTxt = searchVal.value;
     var id;
     function enroll(x){
         paymentMessage.style.visibility="visible";
@@ -460,9 +355,6 @@ $searchInput = "";
         var payPlanVal = payPlan.value;
         var payMethodVal = payMethod.value;
         window.location.href="payment.php?id="+id+"&plan="+payPlanVal+"&method="+payMethodVal+"";
-    }
-    function examSearch(){
-
     }
     payBtn.addEventListener("click", paySubmit);
     closePayBtn.addEventListener("click", closePay);
