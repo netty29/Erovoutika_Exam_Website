@@ -2,6 +2,7 @@
 // echo "<pre>";
 // var_dump($_SERVER);
 // echo "</pre>";
+include_once __DIR__."/connectdb.php";
 $to_home = "#home";
 
 $index = array("/", "/index.php");
@@ -23,7 +24,7 @@ if (!in_array($_SERVER['REQUEST_URI'], $index)) {
 
     <header>
 
-      <a href="" class="brand"><img src="/src/images/Logo2.png" id="logo"></a>
+      <a href="<?php echo $to_home?>" class="brand"><img src="/src/images/Logo2.png" id="logo"></a>
       <div class="menu" id="menu-icon">
           <div class="btn">
             <i class="fas fa-times close-btn"></i>
@@ -36,12 +37,19 @@ if (!in_array($_SERVER['REQUEST_URI'], $index)) {
             <a href="/src/learn.php">Tutorial</a>
           </div>
           <div class="userNav">
+          <?php if (empty($_SESSION["admin_sid"]) && empty($_SESSION["client_sid"])):?>
           <a href="/src/login.php">Login</a>
           <a href="/src/signup.php">
             <button id="signupbtn">
               Signup
             </button>
           </a>
+          <?php else: ?>
+          <a class="dropdown-item" href="/src/includes/logout.php">
+            <button id="signupbtn">Logout</button>
+          </a>
+          <?php endif; ?>
+          
           </div>
         </div>
         

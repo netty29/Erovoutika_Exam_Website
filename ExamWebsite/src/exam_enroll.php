@@ -1,10 +1,10 @@
 <?php 
 include_once '../src/includes/connectdb.php';
-if($_SESSION['client_sid'] == null){
-    echo "<script>";
-    echo "window.location = '../src/login.php';";
-    echo "</script>";
-}
+// if($_SESSION['client_sid'] == null){
+//     echo "<script>";
+//     echo "window.location = '../src/login.php';";
+//     echo "</script>";
+// }
 $searchInput;
 ?>
 <!DOCTYPE html>
@@ -67,45 +67,37 @@ $searchInput;
         </center>
     </div>
 <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#0F3695">
-        <div class="container-fluid">
-            <a href="#" class="brand"><img src="images/ero-logo-white.png"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
+    <?php include_once __DIR__."/includes/header.php"?>
 
-            
-        </div>
-    </nav>
-    <form class="d-flex" method="POST">
-        <div class="search-box">
-            <input type="text" autocomplete="off" placeholder="Search Exam" id = "searchExam" name = "search"/>
-                <?php
-                    error_reporting(0);
-                    $searchInput=$_POST['search'];
-                    error_reporting(E_WARNING);
-                ?>
-                <div class="result">
-            </div>
-        </div>
-    </form>
+    
 
     <!-- Multi-Step Table Form -->
         <div id="multi_step_form">
             <div class="container">
                 <div id="multistep_nav">
-                <div class="progress_holder">
+                    <div class="progress_holder">
+                    </div>
+                    <div class="progress_holder">
+                    </div>
+                    <div class="progress_holder">
+                    </div>
+                    <div class="progress_holder">
+                    </div>
+                    <div class="progress_holder">
+                    </div>
                 </div>
-                <div class="progress_holder">
-                </div>
-                <div class="progress_holder">
-                </div>
-                <div class="progress_holder">
-                </div>
-                <div class="progress_holder">
-                </div>
-                </div>
-
+                <form class="d-flex" method="POST">
+                    <div class="search-box" style="height: 25vh; display: flex;">
+                        <input type="text" autocomplete="off" placeholder="Search Exam" id = "searchExam" name = "search" style="margin: auto auto;"/>
+                            <?php
+                                error_reporting(0);
+                                $searchInput=$_POST['search'];
+                                error_reporting(E_WARNING);
+                            ?>
+                            <div class="result">
+                        </div>
+                    </div>
+                </form>
 
         <!-- Exam Card -->
 
