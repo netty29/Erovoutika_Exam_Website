@@ -17,7 +17,7 @@ body{
       padding: 0 20px;
       margin: 50px auto;
   }
-  .logoast{
+  .logoastp{
     position: absolute;
     margin-left: -330px;
     margin-top: 250px;
@@ -172,7 +172,7 @@ form .form-label{
     .container{
       max-width: 100%;
       }
-    .logoast{
+    .logoastp{
       align-items: center;
       position: relative;
       margin: 0 auto;
@@ -195,7 +195,7 @@ form .form-label{
     .container{
       max-width: 100%;
       }
-    .logoast{
+    .logoastp{
       align-items: center;
       position: relative;
       margin: 0 auto;
