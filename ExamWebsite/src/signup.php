@@ -8,7 +8,7 @@
    </head>
 <body>
 <div class="container">
-<img src="images/Logo2light.png" class="logo2" alt="logo">
+<img src="images/Logo2light.png" class="logo1" alt="logo">
     <div class="wrapper">
         <div class="title"><span>Signup Form</span></div>
             <form action="signup.php" method="post">

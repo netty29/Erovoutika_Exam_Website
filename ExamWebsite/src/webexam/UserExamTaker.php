@@ -60,7 +60,7 @@
                                 else {
                                     $sql_query .= " OR ";
                                 }
-                            }
+                            } 
                             $fetch_sql_query = mysqli_query($connectdb, $sql_query);
                             if($fetch_sql_query){
                                 while($tbAnswer_row = mysqli_fetch_array($fetch_sql_query)){
@@ -207,30 +207,8 @@
                       </div>
 
                       <div class="modal-body ms-3">
-                        <div class="row">
-                           <div class="row">
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">1</button>
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">2</button>
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">3</button>
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">4</button>
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">5</button>
-                            </div>
-
-                            <div class="row mt-2">
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">6</button>
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">7</button>
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">8</button>
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">9</button>
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">10</button>
-                            </div>
-
-                            <div class="row mt-2">
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">11</button>
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">12</button>
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">13</button>
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">14</button>
-                                <button type="button" class="col-sm cardbtn btn-danger border border-2">15</button>
-                            </div>
+                        <div class="row" id="ans_unans_progress">
+                          
                         </div>
                       </div>
                       <div class="modal-footer">

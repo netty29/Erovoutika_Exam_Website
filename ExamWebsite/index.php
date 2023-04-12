@@ -22,7 +22,7 @@ include_once 'src/includes/header.php';
 			  <div class="home1">
           <img src="src/images/login.png" id="logo2" style="position:absolute";>
               <br><br>
-              <h4 class="info1" id="info1">&nbsp;&nbsp;&nbsp;One-Stop-Shop <br>Innovative Solutions</h3>
+              <h4 class="info1" id="info1">&nbsp;&nbsp;&nbsp;One-Stop-ShopSHGOSPSHOSP <br>Innovative Solutions</h3>
               <br>
               <h5 class="info2" id="info2">We are team of Engineers and IT making <br> Solutions for Robotics, Automation, <br> Electronics and ICT.</h4>
               <br><br>

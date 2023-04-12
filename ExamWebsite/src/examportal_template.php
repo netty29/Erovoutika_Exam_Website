@@ -31,7 +31,7 @@ $clExID = $_GET['clExID'];
         <p><?php echo $clExInstructions ?></p>
         <!-- GETS THE EXAM ID THEN PASS IT TO THE QUESTION -->
         <?php echo
-            '<a href="../webexam/UserExamTaker.php?clExID='.$clExID.'">'
+            '<a href="../src/webexam/UserExamTaker.php?clExID='.$clExID.'">'
             ?>
             Start Answering</a>
     </div>

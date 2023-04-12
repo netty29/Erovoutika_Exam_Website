@@ -146,7 +146,7 @@ unset($clQsID_value);
                         `clExDescription` = '$clExDescription_value', 
                         `clExInstructions` = '$clExInstructions_value', 
                         `clExLastEditedBy` = '$clExLastEditedBy_value',
-                        `clExLastEditDate` = date_format(now(), '%Y-%m-%d %H:%i:%s') 
+                        `clExLastEditDate` = date_format(now(), '%Y-%m-%d %H:%i:%s')
                     WHERE `clExID` = '$clExID_value';
                 ";
             }
@@ -281,7 +281,8 @@ unset($clQsID_value);
 
         $sql_query .= "UPDATE `tbExam`
             SET `clExPublish` = '$clExPublish_value', 
-                `clExPublishedBy` = '$clExPublishedBy_value' 
+                `clExPublishedBy` = '$clExPublishedBy_value', 
+                `clExPublishedDate` = date_format(now(), '%Y-%m-%d %H:%i:%s')
             WHERE `clExID` = '$clExID_value';
             ";
 

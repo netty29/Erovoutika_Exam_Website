@@ -36,7 +36,7 @@ if($_SESSION['client_sid']==session_id()){
 	?>
 
     <p>im client</p>
-    <a href="../includes/logout.php">logout</a>
+    <a href="/includes/logout.php">logout</a>
 
 	<?php 
 	include_once 'footer.php';

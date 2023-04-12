@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="container">
-      <img src="images/Logo2light.png" class="logo" alt="logo">
+      <img src="images/Logo2light.png" class="logo111" alt="logo">
       <div class="wrapper">
         <div class="title"><span>Login Form</span></div>
         <form action="includes/validation.php" method="post">

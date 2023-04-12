@@ -6,7 +6,7 @@
     
     --fontBody: 'Open Sans', sans-serif;
   }
-  body {
+  .contributorsContainer {
     top: 10%;
     left: 50%;
     position: absolute;
@@ -22,7 +22,7 @@
   .blog-entry {
     margin-bottom: 50px;
     width: 650px;
-    height: 350px;
+    height: 155px;
     background-color: white;
     
     padding-left: 150px;
@@ -35,11 +35,10 @@
   }
   
   .blog-img {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
     position: absolute;
-    margin-top: 50px;
-    margin-left: -275px;
+    margin-left: -225px;
     border-radius: 100%;
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
@@ -63,10 +62,9 @@
   
   .content-date{
     position: absolute;
-    width: 250px;
-    height: 250px;
-    margin-top: 50px;
-    left: -125px;
+    width: 150px;
+    height: 150px;
+    left: -75px;
     background: var(--darkgray);
     opacity: 0;
     border-radius: 100%;
@@ -76,8 +74,7 @@
     width: 140px;
     color: white;
     padding: 10px;
-    margin-top: 100px;
-    margin-left: 42px;
+    margin-top: 60px;
     font-weight: bold;
     font-size: 20px;
     text-align: center;
@@ -86,7 +83,7 @@
   }
   
   .content-tag {
-    width: 100px;
+    width: 300px;
     background: var(--secondary);
     color: white;
     margin-top: 5px;

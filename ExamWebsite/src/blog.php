@@ -10,82 +10,71 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js"></script>
 </head>
 <body>
-    <div class="banner">
-        <div class="typed_wrap">
-        <h1>We Are <span class="typed"></span></h1>
+    <?php include __DIR__."\includes\header.php"?>
+    <div class="contributorsContainer">
+      <div class="typingContainer">
+        <div class="banner">
+          <div class="typed_wrap">
+          <h1>We Are <span class="typed"></span></h1>
+          </div>
         </div>
-    </div>
-    </div>
-
-    <div class="blog-entry">
-      <img class="blog-img" src="images/blog_user.png" alt="">
-      <div class="content-date"><div class="date">2022-10-14</div></div>
-      <div class="blog-content">
-        <div class="content-title"><h1>Blog Name 1</h1></div>
-        <div class="content-tag">HTML/CSS</div>
-        <span class="content-text">Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit. Cra
-          s lacinia consectetur arcu, in semper magn
-          a posuere non. Fusce sagittis eros magna,e
-          u aliquam libero maximus eu. Sed sed commo
-          do neque. Fusce eget volutpat quam. Sed no
-          n maximus urna, molestie volutpat orci. Al
-          iquam vel viverra mi. Aliquam erat volutpa
-          t. Aenean non libero rhoncus, condimentuml 
-          justo at, posuere ipsum. Duis sit amet ero
-          s orci. Curabitur diam massa, dictum et fe
-          lis ac, condimentum posuere dui. Vestibulu
-          m aliquet sapien vel eros imperdiet, sit a
-          met condimentum enim congue. </span>
-          <div class="content-button">Read more</div>
       </div>
-    </div>
-    <div class="blog-entry">
-      <img class="blog-img" src="images/blog_user.png" alt="">
-      <div class="content-date"><div class="date">2022-10-15</div></div>
-      <div class="blog-content">
-        <div class="content-title"><h1>Blog Name 2</h1></div>
-        <div class="content-tag">JAVASCRIPT</div>
-        <span class="content-text">Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit. Cra
-          s lacinia consectetur arcu, in semper magn
-          a posuere non. Fusce sagittis eros magna,e
-          u aliquam libero maximus eu. Sed sed commo
-          do neque. Fusce eget volutpat quam. Sed no
-          n maximus urna, molestie volutpat orci. Al
-          iquam vel viverra mi. Aliquam erat volutpa
-          t. Aenean non libero rhoncus, condimentuml 
-          justo at, posuere ipsum. Duis sit amet ero
-          s orci. Curabitur diam massa, dictum et fe
-          lis ac, condimentum posuere dui. Vestibulu
-          m aliquet sapien vel eros imperdiet, sit a
-          met condimentum enim congue. </span>
-          <div class="content-button">Read more</div>
+      <div class="developerContainer">
+      <div class="blog-entry">
+        <img class="blog-img" src="images/user images/RENZI.png" alt="">
+        <div class="content-date"><div class="date">2022-10-14</div></div>
+        <div class="blog-content">
+          <div class="content-title"><h1>Renzi Delposo</h1></div>
+          <div class="content-tag">FULL STOCK/PROJECT MANAGER</div>
+        </div>
       </div>
-    </div>
-    <div class="blog-entry">
+      <div class="blog-entry">
+        <img class="blog-img" src="images/user images/6_Untitleddesign.png" alt="">
+        <div class="content-date"><div class="date">2022-10-15</div></div>
+        <div class="blog-content">
+          <div class="content-title"><h1>Angelica Santos</h1></div>
+          <div class="content-tag">MAIN BACK-END DEVELOPER</div>
+        </div>
+      </div>
+      <div class="blog-entry">
+        <img class="blog-img" src="images/user images/CLISH.jpg">
+        <div class="content-date"><div class="date">2022-10-16</div></div>
+        <div class="blog-content">
+          <div class="content-title"><h1>Clisheyl Ruth Diestro</h1></div>
+          <div class="content-tag">FRONT-END DEVELOPER</div>
+        </div>
+      </div>
+      <div class="blog-entry">
+      <img class="blog-img" src="images/user images/PAM.jpg">
+      <div class="content-date"><div class="date">2022-10-16</div></div>
+      <div class="blog-content">
+        <div class="content-title"><h1>Pamela Rose Dela Torre</h1></div>
+        <div class="content-tag">DOCUMENTATION/FRONT-END</div>
+      </div>
+      </div>
+      <div class="blog-entry">
       <img class="blog-img" src="images/blog_user.png">
       <div class="content-date"><div class="date">2022-10-16</div></div>
       <div class="blog-content">
-        <div class="content-title"><h1>Blog Name 3</h1></div>
-        <div class="content-tag">PHP</div>
-        <span class="content-text">Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit. Cra
-          s lacinia consectetur arcu, in semper magn
-          a posuere non. Fusce sagittis eros magna,e
-          u aliquam libero maximus eu. Sed sed commo
-          do neque. Fusce eget volutpat quam. Sed no
-          n maximus urna, molestie volutpat orci. Al
-          iquam vel viverra mi. Aliquam erat volutpa
-          t. Aenean non libero rhoncus, condimentuml 
-          justo at, posuere ipsum. Duis sit amet ero
-          s orci. Curabitur diam massa, dictum et fe
-          lis ac, condimentum posuere dui. Vestibulu
-          m aliquet sapien vel eros imperdiet, sit a
-          met condimentum enim congue. </span>
-          <div class="content-button">Read more</div>
+        <div class="content-title"><h1>Joshua Macoy Cabanza</h1></div>
+        <div class="content-tag">BAC-END DEVELOPER</div>
       </div>
+      </div>
+      <div class="blog-entry">
+        <img class="blog-img" src="images/blog_user.png">
+        <div class="content-date"><div class="date">2022-10-16</div></div>
+        <div class="blog-content">
+          <div class="content-title"><h1>Kenneth Valerio</h1></div>
+          <div class="content-tag">FRONT-END DEVELOPER</div>
+        </div>
+      </div>
+      </div>
+      
     </div>
+    
+    
+
+    
     <script>
         $(function(){
   $(".typed").typed({

@@ -48,12 +48,12 @@ Legend:
 */
 
 
-var tbQuestion_data_length = 0; // Question Length? - angge
-var curr_tbAnswer_data_length = []; //Answer of the said ^ data length - angge
-var curr_tbAnswer_data_topID = []; // First choice? - angge
-var isAddNewQuestionActive = false; // Add new question - angge
-var isAddNewFillBlanksActive = false; // Add fill in the blanks - angge
-var isAddNewHybridMultipleActive = false; // Add new multiple choice - angge
+var tbQuestion_data_length = 0;
+var curr_tbAnswer_data_length = [];
+var curr_tbAnswer_data_topID = [];
+var isAddNewQuestionActive = false;
+var isAddNewFillBlanksActive = false;
+var isAddNewHybridMultipleActive = false;
 
 if(examID == 0) {
     var totalQuestionCount = 0;
@@ -1052,6 +1052,39 @@ function transferExamData(in_resetModifyTypeValue,in_updateType) {
     });
 }
 
+// This function is copied from transferExamData()
+function tempDeleteQuestion(in_resetModifyTypeValue,in_updateType) {
+    // Pass to '../crud/admin_exameditor_update.php' for Database Insertion
+    $(document).ready(function(){
+        $.ajax({
+            url: "../crud/admin_exameditor_update.php", 
+            type: "POST", 
+            data: {
+                curr_tbExam_data_ajax: curr_tbExam_data, 
+                curr_QA_data_ajax: curr_QA_data, 
+                updateType_ajax: in_updateType
+            }, 
+            // contentType: false, 
+            // processData: false, 
+            // async: false, 
+            cache: false, 
+            success: function(data) {
+                // alert(data);
+                
+            if(in_resetModifyTypeValue == false) {
+                    alert('Question deleted successfully.');
+                    Object.keys(curr_tbExam_data).forEach(function(in_index) { delete curr_tbExam_data[in_index] })
+                    curr_QA_data = [];
+                }
+            }, 
+            error: function(data) {
+                // alert(data);
+                alert('ERROR: An error occured while saving the Exam.');
+            }
+        });
+    });
+}
+
 function modifyExam(in_buttonName, in_elementID) {
     // =====Add=====
     if((in_buttonName.localeCompare("inputbutton_qa_add")) == 0) { // Add Question and Answers
@@ -1154,8 +1187,11 @@ function modifyExam(in_buttonName, in_elementID) {
         totalQuestionCount--;
         toggleEmptyText(totalQuestionCount, "i-div--qa-empty", "i-div--qa-display");
         
+        tempDeleteQuestion(false,0); // <--Temporary delete question, came from delete function exam
+        
         // Delete in_element
         $(qa_elementRow).remove();
+        
     }
     else if((in_buttonName.localeCompare("inputbutton_answerhybridmultiple_delete")) == 0) { // Delete Hybrid Multiple Choice Answer
         var answerHybridMultiple_elementRow = document.getElementById(in_elementID);
@@ -1175,6 +1211,7 @@ function modifyExam(in_buttonName, in_elementID) {
 
         // Delete in_element
         $(answerHybridMultiple_elementRow).remove();
+        
     }
     // =====Update=====
     else if((in_buttonName.localeCompare("form_exam")) == 0) { // Update Exam (Form name = "form_exam"; Button name = "inputsubmit_exam_update")
